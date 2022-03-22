@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: daijian-gateway
+  profiles:
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+dubbo:
+  protocol:
+    name: dubbo
+  application:
+    qos-enable: false
+  consumer:
+    check: false
+  cloud:
+    # 订阅的服务
+    subscribed-services: daijian-user
+---
+# 生产环境
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos:8848
+dubbo:
+  protocol:
+    port: 20880
+---
+# 本地环境
+spring:
+  profiles: local
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+dubbo:
+  protocol:
+    port: 20880

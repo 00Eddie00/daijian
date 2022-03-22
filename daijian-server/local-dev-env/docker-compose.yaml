@@ -1,0 +1,100 @@
+version: "2"
+services:
+  nacos:
+    image: nacos/nacos-server:1.1.4
+    container_name: nacos
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+    ports:
+      - 8848:8848
+    networks:
+      - custom_net
+  seata:
+    image: seataio/seata-server:1.2.0
+    #image: registry.cn-beijing.aliyuncs.com/daijian/seata:0.7.1
+    container_name: seata
+    ports:
+      - 8091:8091
+    networks:
+      - custom_net
+  mysql:
+    image: mysql:8.0.15
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=daijian
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - custom_net
+  redis:
+    image: redis:4.0
+    container_name: redis
+    volumes:
+      - ./volumes/redis/data:/data
+    ports:
+      - 6379:6379
+    command: ["--requirepass","daijian"]
+    networks:
+      - custom_net
+  elasticsearch:
+    image: bolingcavalry/elasticsearch-with-ik:6.5.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    volumes:
+      - ./volumes/elasticsearch/data:/home/elasticsearch/data
+      - ./volumes/elasticsearch/logs:/home/elasticsearch/logs
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - custom_net
+  kibana:
+    image: kibana:6.5.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - custom_net
+  rocketmq-namesrv:
+    image: rocketmqinc/rocketmq:4.3.2
+    container_name: rocketmq-namesrv
+    ports:
+      - 9876:9876
+    entrypoint: sh mqnamesrv
+    networks:
+      - custom_net
+  rocketmq-broker:
+    image: rocketmqinc/rocketmq:4.3.2
+    container_name: rocketmq-broker
+    volumes:
+      - ./volumes/rocketmq/conf/broker.conf:/opt/rocketmq-4.3.2/conf/broker.conf
+    ports:
+      - 10909:10909
+      - 10911:10911
+    entrypoint: sh mqbroker -n rocketmq-namesrv:9876 -c /opt/rocketmq-4.3.2/conf/broker.conf
+    networks:
+      - custom_net
+    depends_on:
+      - rocketmq-namesrv
+  rocketmq-console:
+    image: styletang/rocketmq-console-ng:1.0.0
+    container_name: rocketmq-console
+    environment:
+      JAVA_OPTS: -Drocketmq.namesrv.addr=rocketmq-namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    ports:
+      - 17890:17890
+    networks:
+      - custom_net
+    depends_on:
+      - rocketmq-broker
+networks:
+  custom_net:
+    external:
+      name: daijian_net

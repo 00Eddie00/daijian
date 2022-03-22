@@ -1,0 +1,44 @@
+version: "2"
+services:
+  daijian-gateway:
+    image: daijian-gateway:latest
+    build: daijian-gateway/
+    container_name: daijian-gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - custom_net
+  daijian-platform:
+    image: daijian-platform:latest
+    build: daijian-platform/
+    container_name: daijian-platform
+    networks:
+      - custom_net
+  daijian-seller:
+    image: daijian-seller:latest
+    build: daijian-seller/
+    container_name: daijian-seller
+    networks:
+      - custom_net
+  daijian-support:
+    image: daijian-base:latest
+    build: daijian-base/
+    container_name: daijian-base
+    networks:
+      - custom_net
+  daijian-trade:
+    image: daijian-trade:latest
+    build: daijian-trade/
+    container_name: daijian-trade
+    networks:
+      - custom_net
+  daijian-user:
+    image: daijian-user:latest
+    build: daijian-user/
+    container_name: daijian-user
+    networks:
+      - custom_net
+networks:
+  custom_net:
+    external:
+      name: daijian_net

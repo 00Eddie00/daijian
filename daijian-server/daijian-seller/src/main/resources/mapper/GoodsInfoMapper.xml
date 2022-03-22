@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.daijian.seller.repository.mybatis.GoodsInfoMapper">
+
+    <select id="selectByIdList" resultType="shop.daijian.seller.entity.GoodsInfo">
+        SELECT * FROM goods_info t WHERE
+        <if test="null == goodsIdList or goodsIdList.size == 0">
+            1=0
+        </if>
+        <if test="null != goodsIdList and goodsIdList.size > 0">
+            t.goods_id IN
+            <foreach item="item" collection="goodsIdList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            ORDER BY field(t.goods_id,
+            <foreach item="item" collection="goodsIdList" separator=",">
+                #{item}
+            </foreach>
+            )
+        </if>
+    </select>
+
+</mapper>

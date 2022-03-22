@@ -1,0 +1,53 @@
+logging:
+  level:
+    shop.daijian: debug
+swagger:
+  authorization:
+    key-name: Authorization
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    default-property-inclusion: non_null
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      db-type: mysql
+pay:
+  alipay:
+    gatewayUrl: https://openapi.alipaydev.com/gateway.do
+    appid: 2016100100643068
+    appPrivateKey: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCIS4lkSsw3H3pM8dMQWdkOAAXQjESyKiVMRv8JZHdIMkInZgOPlwjm0bXpEpgpufUQ+mTmF5+e9coobgcovMvcbXrJhH4WCMg1mx9svozP0CnLs2vVhGU54b4Bo3098ljrELeE6gDVD8bV1ki/ykR6wAOc6maPKIGTxqI14RqwJKzrUkNV+EOaKFwnZB8bhl0LJddbkXxSuYU6ux3Jr2z2PX6/uGG1QLQIH89YTaKnZWvEMjkR2jhY8FS6978iAHe5S0PKHl0KiUrYPeCfxgsPQD362tJaJc7GVOd8EjCA3xE1ZirSiFfzvmnfGaXHlbqShGPhk/Od4auPx9jcTbxFAgMBAAECggEANg6HkpCcCGziq+vpw31vOj9GDx3jDSrsGiG6e3YuXSMZ29h5JxVHQY0Bckyer0YC7dXx+NR7yadAo+Jn0n9295kwbwaun3yiM6ivwQiefrnYKeOirE/Tei6PlsTKIqyhGbJKp1vMMrUMLrnLps3JdUn85NqPDM6K/hp1MZtzY1LARRX9WaN6btATTbHBFieGSZMM5jdcKZ1CQv1y0FU0i6Rv9/f7zyrXSjjLOZ+PgZ5sIyUWStuzyDoSSDUFrT/Jo7L6JzwwMb7TR4o0cD2mGFIEojsDG6+XkQGwV4WRIhQh3JN18P4EKjmtrEuuKqSLgtQ2jBcyTlmkw6QIAB0bLQKBgQDsGSrcmeihx/4QWf1EHLVZSBDvlMIBvA6flo+IJ0zbfXqAqN0Gyg/HPH6x7fF4S/pAJltR3ynX+7PJEq1/GTG3FTgXJVwMFsqkykAhrmSrll422wubLd4Xz4VEmf59jF5xy6INUAjJLiNBzFwhJmYRgRsNVAPVvb7tVeVonQ9STwKBgQCTyK/IhGg7NBEzQGVXRLypp4LzhgrLY24P63VxUGdEb5Uwh+bj6gNAZrzEFSuC1kX5TaNwVVPIEB8uZXP7DPqcPqpf7JpL2eGuPEQWFKrzNuUSUeTjsAfSsUQiZL3wZTqv2oqkdCEYpJgsYJyAFg4Qi7TxlH07jfAmDKamX+lHKwKBgGJE/3Aep5Ne+MK5kg8dm+Xzdwkhc7bhHX0TX96d7QGWsryGjKjcxcB5z4ojrdQSW7EDxhLHvlTlsSlKGujCBc1ciaIorK1jdykr/ZGHUuOQjNpsReJrLvveJmwtZJ3BJTZcObEs1NtX1tj2RIqPvwAeKrJbe9UlSyjiDcCDTvNFAoGAd7v/f+yXLnBvByFDekM8wA/yLzAJCuSSRd+1lYtZP79QFrPlQ/9Thxg2FIA6cpT8uJJIuzjG2q8FNGgKYfsQCQtUqsdd89qh2LMHTwSLxOZTDla/piH3FKN+2obYxS6fL99WuQtFzVt912anJbe4yXsHrTtrg5bqXUmes+m9bWUCgYAkQI0N9HQQMkQTWmm60LW0w93tVYiKbVm5V93XKNo4MUQbRcNj2mJ3ZWwJ2J1oc5+FcBza3eDzdmfIY4dJWtQiAK4XDVFSb8VH33MNjvcmZV2rDkoCCm2j4JkYZ71AZGaJTNXmw83AipysdqJtrWjLdS5UZy8iKfDeUyRmZAThOw==
+    alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxagqoagaXSz2JHufSMZBbIAjzeqqjZu1lDZ6f5eZzRZNySVTvvu0EmTSTh8A+sJttN2NPFJQZAfLEc3CerEMQ7EgklmXUZSOtiQnUIOsMLUjQAC3pmgqdICD95JTxVOspn4NnxQ9ypdLm76FerCU8SWL39sEoopRHmj9etwIfI9dpkpuLPygXjgRv7UwMOPQkN6f+nPSnQB9AOq7YMo3FQhrivstKM0xeD08fGY8SxtBxcBEK8vQW5vpU99bWogHT+JJreCON4IvYi+mRpqM543Dv8Ipy7TxOaTRjF5+v8JqmP0ushw+fGAHxa8lAP3+zBxBKl5c0+POjNPvOHuuRQIDAQAB
+    returnUrl: http://localhost:3000/orderCen/allOrder
+    notifyUrl: http://39.100.101.221:8080/daijian-trade/alipay/notify
+---
+# 生产环境
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://mysql:3306/daijian?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: daijian
+  redis:
+    host: redis
+    password: daijian
+server:
+  port: 8080
+---
+# 本地环境
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/daijian?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: daijian
+  redis:
+    host: localhost
+    password: daijian
+server:
+  port: 8086

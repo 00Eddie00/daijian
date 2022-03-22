@@ -1,0 +1,39 @@
+logging:
+  level:
+    shop.daijian: debug
+swagger:
+  authorization:
+    key-name: Authorization
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    default-property-inclusion: non_null
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      db-type: mysql
+---
+# 生产环境
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://mysql:3306/daijian?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: daijian
+server:
+  port: 8080
+---
+# 本地环境
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/daijian?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: daijian
+server:
+  port: 8084

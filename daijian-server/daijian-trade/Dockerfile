@@ -1,0 +1,4 @@
+FROM hub.c.163.com/library/java:8-alpine
+ADD target/*.jar /app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "-Xms512m", "-Xmx512m", "/app.jar", "--spring.profiles.active=prod"]
